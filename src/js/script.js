@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
   document.querySelectorAll('li').forEach(item => {
-    item.addEventListener('click', event => {
+    item.addEventListener('click', () => {
       const checkbox = item.querySelector('input[type="checkbox"]');
       if (checkbox) {
         checkbox.checked = !checkbox.checked;
@@ -14,6 +14,10 @@ document.addEventListener('DOMContentLoaded', function () {
   let total = 0;
 
   checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('click', function (event) {
+      event.stopPropagation();
+    });
+
     checkbox.addEventListener('change', function () {
       const priceElement = this.parentElement.querySelector('.preco');
       const price = parseFloat(priceElement.textContent.replace('R$', '').replace(',', '.'));
